@@ -7,18 +7,18 @@ today = dt.datetime.today()
 fromYear = today.year
 
 def getData(year,iMonth):
-    ticker = 'CL'+keys[i-1]+str(year)[-2:]+'.NYM'
+    ticker = 'CL'+keys[i]+str(year)[-2:]+'.NYM'
     data = yf.download(ticker)[-1:].loc[:,['Adj Close','Volume']]
-    data['exp']=months[i-1]+' '+str(year)[-2:]
-    data.set_index('exp',inplace=True,drop=True)
+    data['exp'] = months[i]+' '+str(year)[-2:]
+    data.set_index('exp', inplace = True, drop = True)
     return data
     
-for i in range(today.month+1,13):
+for i in range(today.month,12):
     data = getData(fromYear,i)
-    if i==today.month+1:
+    if i == today.month:
         table = pd.DataFrame(data)
     else:
-        table = pd.concat([table,data],axis=0)
+        table = pd.concat([table,data],axis = 0)
 
 for i in range(12):
     data = getData(fromYear+1,i)
@@ -32,5 +32,3 @@ ax[1].set_yscale('log')
 fig.subplots_adjust(hspace=0)
 plt.xticks(rotation=45, horizontalalignment='right', fontsize=12)
 plt.show()
-
-
