@@ -9,7 +9,8 @@ import matplotlib.pyplot as plt
 import yfinance as yf
 import datetime
 
-def getdata(years, period):
+def getdata(period):
+    years = int(input("How many years of futures do you want to download?\n"))
     this_year = datetime.date.today().year
     starting_year = int(str(this_year)[-2:])
     ending_year = int(str(this_year + years)[-2:])
@@ -52,7 +53,6 @@ def price_plot(prices):
     plt.ylabel("USD / bbl")
     plt.grid(axis='y', alpha = .5)
     plt.title("Futures @ {}".format(prices.index[-2].date()))
-    plt.savefig("prices_example.png")
 
 def volume_plot(volume):
     plt.figure(figsize=(10,5))
@@ -62,4 +62,3 @@ def volume_plot(volume):
     plt.grid(axis = 'y', which = 'major', alpha = .5)
     plt.grid(axis = 'y', which = 'minor', alpha = .1)
     plt.title("Futures @ {}".format(volume.index[-2].date()))
-    plt.savefig("volume_example.png")
