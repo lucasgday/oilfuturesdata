@@ -8,7 +8,7 @@ plt.style.use('dark_background')
 keys = list("FGHJKMNQUVXZ")
 months = [calendar.month_name[i+1] for i in range(12)] 
 today = dt.datetime.today()
-daysAgo = 15
+daysAgo = 30
 startDate = today - dt.timedelta(daysAgo)
 fromYear = today.year
 
@@ -30,10 +30,12 @@ for i in range(today.month+1,13):
         tablePast = pd.concat([tablePast, data[:1]],axis=0)
 
 #2nd year
-for i in range(1,13):
-    data = getData(fromYear+1,i)
-    table = pd.concat([table, data[-1:]],axis=0)
-    tablePast = pd.concat([tablePast, data[:1]],axis=0)
+for k in range (1,3):
+    for i in range(1,13):
+        data = getData(fromYear+k,i)
+        table = pd.concat([table, data[-1:]],axis=0)
+        tablePast = pd.concat([tablePast, data[:1]],axis=0)
+
 
 fig, ax = plt.subplots(figsize=(12,8), nrows=3, ncols=1, 
                        gridspec_kw={'height_ratios':[3, 1, 1]})
